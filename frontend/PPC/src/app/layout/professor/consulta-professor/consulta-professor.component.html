@@ -1,0 +1,67 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Professor'" [icon]="'fa-edit'"></app-page-header>
+
+  <div class="row">
+
+    <div class="col col-xl-6 col-lg-12">
+      <h2>{{titulo}}</h2>
+      <div class="card mb-3">
+        <!--<div class="card-header">{{titulo}}</div>-->
+        <table class="table table-sm">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Curso</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+          </tr>
+          </thead>
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<th scope="row">1</th>-->
+            <!--<td>Mark</td>-->
+            <!--<td>Otto</td>-->
+            <!--<td>@mdo</td>-->
+            <!--<td>-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Alterar</button>&nbsp;-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Excluir</button>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row">2</th>-->
+            <!--<td>Jacob</td>-->
+            <!--<td>Thornton</td>-->
+            <!--<td>@fat</td>-->
+            <!--<td>-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Alterar</button>&nbsp;-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Excluir</button>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<th scope="row">3</th>-->
+            <!--<td colspan="2">Larry the Bird</td>-->
+            <!--<td>@twitter</td>-->
+            <!--<td>-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Alterar</button>&nbsp;-->
+              <!--<button _ngcontent-c9="" class="btn btn-sm btn-info" type="button">Excluir</button>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+          <tbody>
+            <tr *ngFor="let curso of cursos; let i = index;">
+              <td>{{ curso.id }}</td>
+              <td>{{ curso.curso }}</td>
+              <td><button _ngcontent-c9="" class="btn btn-sm btn-info" type="button" (click)="editar(curso.id);">Alterar</button></td>
+              <td><button _ngcontent-c9="" class="btn btn-sm btn-info" type="button" (click)="excluir(curso.id, i);">Excluir</button></td>
+            </tr>
+            <tr>
+              <td colspan="6" style="text-align: right;">Total de Registros: {{ cursos.length }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-secondary" [routerLink]="['/professor']">Voltar</button>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
