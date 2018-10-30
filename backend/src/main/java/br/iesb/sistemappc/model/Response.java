@@ -1,4 +1,4 @@
-package br.iesb.sistemappc.entidades;
+package br.iesb.sistemappc.model;
 
 public class Response {
 

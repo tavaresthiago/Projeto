@@ -1,8 +1,8 @@
-package br.iesb.sistemappc.service;
+package br.iesb.sistemappc.controller;
 
-import br.iesb.sistemappc.dao.CursoDAO;
-import br.iesb.sistemappc.entidades.Curso;
-import br.iesb.sistemappc.entidades.Response;
+import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Response;
+import br.iesb.sistemappc.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,9 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({"/service"})
-public class CursoService {
-
+public class ProfessorController {
     @Autowired
-    private CursoDAO cursoDAO;
+    private CursoRepository cursoRepository;
 
     /**
      * Cadastra um novo curso
@@ -23,9 +22,10 @@ public class CursoService {
      * @return
      */
     @RequestMapping(value="/curso", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response cadastrar(Curso curso){
+    public @ResponseBody
+    Response cadastrar(Curso curso){
         try {
-            this.cursoDAO.create(curso);
+            this.cursoRepository.create(curso);
             return new Response(1, "Registro cadastrado com sucesso!");
         }catch (Exception e) {
             return new Response(0,e.getMessage());
@@ -40,7 +40,7 @@ public class CursoService {
     @RequestMapping(value = "/curso", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response atualizar(Curso curso){
         try {
-            this.cursoDAO.update(curso);
+            this.cursoRepository.update(curso);
             return new Response(1, "Registro atualizado com sucesso!");
         }catch (Exception e){
             return new Response(0,e.getMessage());
@@ -52,9 +52,10 @@ public class CursoService {
      * @return
      */
     @RequestMapping(value="/curso", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody List<Curso> consultar(){
+    public @ResponseBody
+    List<Curso> consultar(){
 
-        return this.cursoDAO.findAll();
+        return this.cursoRepository.findAll();
     }
 
     /**
@@ -65,7 +66,7 @@ public class CursoService {
     @RequestMapping(value="/curso/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Curso buscar(@PathVariable("id") Integer id){
 
-        return this.cursoDAO.findById(id);
+        return this.cursoRepository.findById(id);
     }
 
     /***
@@ -76,11 +77,11 @@ public class CursoService {
     @RequestMapping(value="/curso/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response excluir(@PathVariable("id") Integer id){
 
-        Curso curso = cursoDAO.findById(id);
+        Curso curso = cursoRepository.findById(id);
 
         try {
 
-            cursoDAO.delete(curso);
+            cursoRepository.delete(curso);
 
             return new Response(1, "Registro excluido com sucesso!");
 
@@ -88,4 +89,5 @@ public class CursoService {
             return new Response(0, e.getMessage());
         }
     }
+
 }
