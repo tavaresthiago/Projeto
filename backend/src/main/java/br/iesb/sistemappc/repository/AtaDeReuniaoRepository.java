@@ -1,16 +1,16 @@
 package br.iesb.sistemappc.repository;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.AtaDeReuniao;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface AtaDeReuniaoRepository extends Repository<Curso, Integer> {
+public interface AtaDeReuniaoRepository extends Repository<AtaDeReuniao, Integer> {
 
-    Curso create(Curso curso);
-    Curso delete(Curso curso);
+    AtaDeReuniao create(AtaDeReuniao ataDeReuniao);
+    AtaDeReuniao delete(AtaDeReuniao ataDeReuniao);
     List findAll();
-    Curso findById(Integer id);
-    Curso update(Curso curso);
+    AtaDeReuniao findById(Integer id);
+    AtaDeReuniao update(AtaDeReuniao ataDeReuniao);
 
 }

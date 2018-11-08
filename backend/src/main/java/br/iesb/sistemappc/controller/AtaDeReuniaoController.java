@@ -1,8 +1,8 @@
 package br.iesb.sistemappc.controller;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.AtaDeReuniao;
 import br.iesb.sistemappc.model.Response;
-import br.iesb.sistemappc.repository.CursoRepository;
+import br.iesb.sistemappc.repository.AtaDeReuniaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +14,18 @@ import java.util.List;
 @RequestMapping({"/service"})
 public class AtaDeReuniaoController {
     @Autowired
-    private CursoRepository cursoRepository;
+    private AtaDeReuniaoRepository ataDeReuniaoRepository;
 
     /**
-     * Cadastra um novo curso
-     * @param curso
+     * Cadastra uma nova ata de reunião
+     * @param ataDeReuniao
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ataDeReuniao", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    Response cadastrar(Curso curso){
+    Response cadastrar(AtaDeReuniao ataDeReuniao){
         try {
-            this.cursoRepository.create(curso);
+            this.ataDeReuniaoRepository.create(ataDeReuniao);
             return new Response(1, "Registro cadastrado com sucesso!");
         }catch (Exception e) {
             return new Response(0,e.getMessage());
@@ -33,14 +33,14 @@ public class AtaDeReuniaoController {
     }
 
     /**
-     * Atualiza os dados do curso
-     * @param curso
+     * Atualiza os dados de uma ata de reunião
+     * @param ataDeReuniao
      * @return
      */
-    @RequestMapping(value = "/curso", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response atualizar(Curso curso){
+    @RequestMapping(value = "/ataDeReuniao", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Response atualizar(AtaDeReuniao ataDeReuniao){
         try {
-            this.cursoRepository.update(curso);
+            this.ataDeReuniaoRepository.update(ataDeReuniao);
             return new Response(1, "Registro atualizado com sucesso!");
         }catch (Exception e){
             return new Response(0,e.getMessage());
@@ -51,22 +51,22 @@ public class AtaDeReuniaoController {
      * Consulta todos os cursos cadastrados
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ataDeReuniao", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    List<Curso> consultar(){
+    List<AtaDeReuniao> consultar(){
 
-        return this.cursoRepository.findAll();
+        return this.ataDeReuniaoRepository.findAll();
     }
 
     /**
-     * Busca um curso por paramentro
+     * Busca uma ata de reunião por paramentro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Curso buscar(@PathVariable("id") Integer id){
+    @RequestMapping(value="/ataDeReuniao/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody AtaDeReuniao buscar(@PathVariable("id") Integer id){
 
-        return this.cursoRepository.findById(id);
+        return this.ataDeReuniaoRepository.findById(id);
     }
 
     /***
@@ -74,14 +74,14 @@ public class AtaDeReuniaoController {
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ataDeReuniao/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response excluir(@PathVariable("id") Integer id){
 
-        Curso curso = cursoRepository.findById(id);
+        AtaDeReuniao ataDeReuniao = ataDeReuniaoRepository.findById(id);
 
         try {
 
-            cursoRepository.delete(curso);
+            ataDeReuniaoRepository.delete(ataDeReuniao);
 
             return new Response(1, "Registro excluido com sucesso!");
 
