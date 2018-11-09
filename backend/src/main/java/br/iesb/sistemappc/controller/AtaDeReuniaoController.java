@@ -48,7 +48,7 @@ public class AtaDeReuniaoController {
     }
 
     /**
-     * Consulta todos os cursos cadastrados
+     * Consulta todas as atas de reunião cadastradas
      * @return
      */
     @RequestMapping(value="/ataDeReuniao", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -70,7 +70,7 @@ public class AtaDeReuniaoController {
     }
 
     /***
-     * Exclui um curso por parametro
+     * Exclui uma ata de reunião por parametro
      * @param id
      * @return
      */

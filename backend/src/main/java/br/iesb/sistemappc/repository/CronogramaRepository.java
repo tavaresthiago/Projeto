@@ -1,16 +1,16 @@
 package br.iesb.sistemappc.repository;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.CronogramaDeAtividades;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface CronogramaRepository extends Repository<Curso, Integer> {
+public interface CronogramaRepository extends Repository<CronogramaDeAtividades, Integer> {
 
-    Curso create(Curso curso);
-    Curso delete(Curso curso);
+    CronogramaDeAtividades create(CronogramaDeAtividades cronogramaDeAtividades);
+    CronogramaDeAtividades delete(CronogramaDeAtividades cronogramaDeAtividades);
     List findAll();
-    Curso findById(Integer id);
-    Curso update(Curso curso);
+    CronogramaDeAtividades findById(Integer id);
+    CronogramaDeAtividades update(CronogramaDeAtividades cronogramaDeAtividades);
 
 }

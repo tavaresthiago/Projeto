@@ -1,16 +1,16 @@
 package br.iesb.sistemappc.repository;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Disciplina;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface DisciplinaRepository extends Repository<Curso, Integer> {
+public interface DisciplinaRepository extends Repository<Disciplina, Integer> {
 
-    Curso create(Curso curso);
-    Curso delete(Curso curso);
+    Disciplina create(Disciplina disciplina);
+    Disciplina delete(Disciplina disciplina);
     List findAll();
-    Curso findById(Integer id);
-    Curso update(Curso curso);
+    Disciplina findById(Integer id);
+    Disciplina update(Disciplina disciplina);
 
 }

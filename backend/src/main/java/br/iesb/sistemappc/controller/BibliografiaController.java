@@ -1,8 +1,8 @@
 package br.iesb.sistemappc.controller;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Bibliografia;
 import br.iesb.sistemappc.model.Response;
-import br.iesb.sistemappc.repository.CursoRepository;
+import br.iesb.sistemappc.repository.BibliografiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +14,18 @@ import java.util.List;
 @RequestMapping({"/service"})
 public class BibliografiaController {
     @Autowired
-    private CursoRepository cursoRepository;
+    private BibliografiaRepository bibliografiaRepository;
 
     /**
-     * Cadastra um novo curso
-     * @param curso
+     * Cadastra uma nova bibliografia
+     * @param bibliografia
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/bibliografia", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    Response cadastrar(Curso curso){
+    Response cadastrar(Bibliografia bibliografia){
         try {
-            this.cursoRepository.create(curso);
+            this.bibliografiaRepository.create(bibliografia);
             return new Response(1, "Registro cadastrado com sucesso!");
         }catch (Exception e) {
             return new Response(0,e.getMessage());
@@ -33,14 +33,14 @@ public class BibliografiaController {
     }
 
     /**
-     * Atualiza os dados do curso
-     * @param curso
+     * Atualiza os dados de uma bibliografia
+     * @param bibliografia
      * @return
      */
-    @RequestMapping(value = "/curso", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response atualizar(Curso curso){
+    @RequestMapping(value = "/bibliografia", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Response atualizar(Bibliografia bibliografia){
         try {
-            this.cursoRepository.update(curso);
+            this.bibliografiaRepository.update(bibliografia);
             return new Response(1, "Registro atualizado com sucesso!");
         }catch (Exception e){
             return new Response(0,e.getMessage());
@@ -48,40 +48,40 @@ public class BibliografiaController {
     }
 
     /**
-     * Consulta todos os cursos cadastrados
+     * Consulta todos as bibliografia cadastradas
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/bibliografia", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    List<Curso> consultar(){
+    List<Bibliografia> consultar(){
 
-        return this.cursoRepository.findAll();
+        return this.bibliografiaRepository.findAll();
     }
 
     /**
-     * Busca um curso por paramentro
+     * Busca uma bibliografia por paramentro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Curso buscar(@PathVariable("id") Integer id){
+    @RequestMapping(value="/bibliografia/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Bibliografia buscar(@PathVariable("id") Integer id){
 
-        return this.cursoRepository.findById(id);
+        return this.bibliografiaRepository.findById(id);
     }
 
     /***
-     * Exclui um curso por parametro
+     * Exclui uma bibliografia por parametro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/bibliografia/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response excluir(@PathVariable("id") Integer id){
 
-        Curso curso = cursoRepository.findById(id);
+        Bibliografia bibliografia = bibliografiaRepository.findById(id);
 
         try {
 
-            cursoRepository.delete(curso);
+            bibliografiaRepository.delete(bibliografia);
 
             return new Response(1, "Registro excluido com sucesso!");
 

@@ -1,16 +1,16 @@
 package br.iesb.sistemappc.repository;
 
-import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Bibliografia;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface BibliografiaRepository extends Repository<Curso, Integer> {
+public interface BibliografiaRepository extends Repository<Bibliografia, Integer> {
 
-    Curso create(Curso curso);
-    Curso delete(Curso curso);
+    Bibliografia create(Bibliografia bibliografia);
+    Bibliografia delete(Bibliografia bibliografia);
     List findAll();
-    Curso findById(Integer id);
-    Curso update(Curso curso);
+    Bibliografia findById(Integer id);
+    Bibliografia update(Bibliografia bibliografia);
 
 }
