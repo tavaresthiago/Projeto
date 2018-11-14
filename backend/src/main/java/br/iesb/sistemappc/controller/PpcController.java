@@ -1,8 +1,10 @@
 package br.iesb.sistemappc.controller;
 
 import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Ppc;
 import br.iesb.sistemappc.model.Response;
 import br.iesb.sistemappc.repository.CursoRepository;
+import br.iesb.sistemappc.repository.PpcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +16,18 @@ import java.util.List;
 @RequestMapping({"/service"})
 public class PpcController {
     @Autowired
-    private CursoRepository cursoRepository;
+    private PpcRepository ppcRepository;
 
     /**
-     * Cadastra um novo curso
-     * @param curso
+     * Cadastra um novo ppc
+     * @param ppc
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ppc", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    Response cadastrar(Curso curso){
+    Response cadastrar(Ppc ppc){
         try {
-            this.cursoRepository.create(curso);
+            this.ppcRepository.create(ppc);
             return new Response(1, "Registro cadastrado com sucesso!");
         }catch (Exception e) {
             return new Response(0,e.getMessage());
@@ -33,14 +35,14 @@ public class PpcController {
     }
 
     /**
-     * Atualiza os dados do curso
-     * @param curso
+     * Atualiza os dados do ppc
+     * @param ppc
      * @return
      */
-    @RequestMapping(value = "/curso", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response atualizar(Curso curso){
+    @RequestMapping(value = "/ppc", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Response atualizar(Ppc ppc){
         try {
-            this.cursoRepository.update(curso);
+            this.ppcRepository.update(ppc);
             return new Response(1, "Registro atualizado com sucesso!");
         }catch (Exception e){
             return new Response(0,e.getMessage());
@@ -48,40 +50,40 @@ public class PpcController {
     }
 
     /**
-     * Consulta todos os cursos cadastrados
+     * Consulta todos os ppc's cadastrados
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ppc", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    List<Curso> consultar(){
+    List<Ppc> consultar(){
 
-        return this.cursoRepository.findAll();
+        return this.ppcRepository.findAll();
     }
 
     /**
-     * Busca um curso por paramentro
+     * Busca um ppc por paramentro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Curso buscar(@PathVariable("id") Integer id){
+    @RequestMapping(value="/ppc/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Ppc buscar(@PathVariable("id") Integer id){
 
-        return this.cursoRepository.findById(id);
+        return this.ppcRepository.findById(id);
     }
 
     /***
-     * Exclui um curso por parametro
+     * Exclui um ppc por parametro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/ppc/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response excluir(@PathVariable("id") Integer id){
 
-        Curso curso = cursoRepository.findById(id);
+        Ppc ppc = ppcRepository.findById(id);
 
         try {
 
-            cursoRepository.delete(curso);
+            ppcRepository.delete(ppc);
 
             return new Response(1, "Registro excluido com sucesso!");
 

@@ -1,8 +1,10 @@
 package br.iesb.sistemappc.controller;
 
 import br.iesb.sistemappc.model.Curso;
+import br.iesb.sistemappc.model.Professor;
 import br.iesb.sistemappc.model.Response;
 import br.iesb.sistemappc.repository.CursoRepository;
+import br.iesb.sistemappc.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +16,18 @@ import java.util.List;
 @RequestMapping({"/service"})
 public class ProfessorController {
     @Autowired
-    private CursoRepository cursoRepository;
+    private ProfessorRepository professorRepository;
 
     /**
-     * Cadastra um novo curso
-     * @param curso
+     * Cadastra um novo professor
+     * @param professor
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/professor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    Response cadastrar(Curso curso){
+    Response cadastrar(Professor professor){
         try {
-            this.cursoRepository.create(curso);
+            this.professorRepository.create(professor);
             return new Response(1, "Registro cadastrado com sucesso!");
         }catch (Exception e) {
             return new Response(0,e.getMessage());
@@ -33,14 +35,14 @@ public class ProfessorController {
     }
 
     /**
-     * Atualiza os dados do curso
-     * @param curso
+     * Atualiza os dados do professor
+     * @param professor
      * @return
      */
-    @RequestMapping(value = "/curso", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response atualizar(Curso curso){
+    @RequestMapping(value = "/professor", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Response atualizar(Professor professor){
         try {
-            this.cursoRepository.update(curso);
+            this.professorRepository.update(professor);
             return new Response(1, "Registro atualizado com sucesso!");
         }catch (Exception e){
             return new Response(0,e.getMessage());
@@ -48,40 +50,40 @@ public class ProfessorController {
     }
 
     /**
-     * Consulta todos os cursos cadastrados
+     * Consulta todos os professores cadastrados
      * @return
      */
-    @RequestMapping(value="/curso", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/professor", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
-    List<Curso> consultar(){
+    List<Professor> consultar(){
 
-        return this.cursoRepository.findAll();
+        return this.professorRepository.findAll();
     }
 
     /**
-     * Busca um curso por paramentro
+     * Busca um professor por paramentro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Curso buscar(@PathVariable("id") Integer id){
+    @RequestMapping(value="/professor/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Professor buscar(@PathVariable("id") Integer id){
 
-        return this.cursoRepository.findById(id);
+        return this.professorRepository.findById(id);
     }
 
     /***
-     * Exclui um curso por parametro
+     * Exclui um professor por parametro
      * @param id
      * @return
      */
-    @RequestMapping(value="/curso/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value="/professor/{id}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response excluir(@PathVariable("id") Integer id){
 
-        Curso curso = cursoRepository.findById(id);
+        Professor professor = professorRepository.findById(id);
 
         try {
 
-            cursoRepository.delete(curso);
+            professorRepository.delete(professor);
 
             return new Response(1, "Registro excluido com sucesso!");
 
